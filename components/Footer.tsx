@@ -73,7 +73,7 @@ const Footer: React.FC = () => {
 
         {/* Bottom Bar */}
         <div className="border-t border-cream/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-cream/30 text-xs uppercase tracking-widest font-bold">© 2024 EveryPlants Logistics B.V.</p>
+          <p className="text-cream/30 text-xs uppercase tracking-widest font-bold">© 2025 EveryPlants Logistics B.V.</p>
           <div className="text-cream/30 text-xs font-mono">
             Westland, NL
           </div>
