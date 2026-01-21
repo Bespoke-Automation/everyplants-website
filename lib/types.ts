@@ -1,0 +1,161 @@
+export interface SanityImage {
+  _type: 'image'
+  asset: {
+    _ref: string
+    _type: 'reference'
+  }
+  hotspot?: {
+    x: number
+    y: number
+    height: number
+    width: number
+  }
+}
+
+export interface NavLink {
+  text: string
+  href: string
+  isExternal?: boolean
+}
+
+export interface SocialLink {
+  platform: 'linkedin' | 'instagram' | 'twitter' | 'facebook'
+  url: string
+}
+
+export interface HeroSection {
+  badge: string
+  headlineLines: string[]
+  highlightedLine: string
+  tagline: string
+  ctaText: string
+  ctaLink: string
+  heroImage: SanityImage
+  imageCaption: string
+  badgeText: string
+}
+
+export interface Partner {
+  _id: string
+  name: string
+  logo?: SanityImage
+}
+
+export interface TrustBarData {
+  label: string
+  partners: Partner[]
+}
+
+export interface ValueProp {
+  icon: string
+  title: string
+  subtitle: string
+  description: string
+  image: SanityImage
+}
+
+export interface ValuePropsData {
+  title: string
+  subtitle: string
+  items: ValueProp[]
+}
+
+export interface WorkflowStep {
+  number: string
+  title: string
+  description: string
+  image: SanityImage
+}
+
+export interface HowItWorksData {
+  title: string
+  subtitle: string
+  steps: WorkflowStep[]
+}
+
+export interface ProductCategory {
+  name: string
+  image: SanityImage
+  height: string
+}
+
+export interface AssortmentData {
+  title: string
+  description: string
+  ctaText: string
+  ctaLink: string
+  categories: ProductCategory[]
+}
+
+export interface AboutData {
+  label: string
+  title: string
+  description: string
+  image: SanityImage
+  imageBadge: { value: string; label: string }
+  features: Array<{ title: string; description: string }>
+  linkText: string
+  linkHref: string
+}
+
+export interface Stat {
+  value: string
+  label: string
+}
+
+export interface Testimonial {
+  quote: string
+  authorName: string
+  authorTitle?: string
+  authorCompany?: string
+  authorImage?: SanityImage
+}
+
+export interface CTAData {
+  title: string
+  subtitle: string
+  primaryButton: { text: string; href: string }
+  secondaryButton: { text: string; href: string }
+}
+
+export interface FooterData {
+  address: string
+  phone: string
+  email: string
+  certifications: string[]
+  socialLinks: SocialLink[]
+  sitemapLinks: NavLink[]
+  legalLinks: NavLink[]
+  copyrightText: string
+  locationTag: string
+}
+
+export interface HomepageData {
+  hero: HeroSection
+  marqueeItems: string[]
+  trustBar: TrustBarData
+  valueProps: ValuePropsData
+  howItWorks: HowItWorksData
+  assortment: AssortmentData
+  about: AboutData
+  stats: Stat[]
+  featuredTestimonial: Testimonial
+  cta: CTAData
+  seo: {
+    metaTitle: string
+    metaDescription: string
+    ogImage?: SanityImage
+  }
+}
+
+export interface NavigationData {
+  mainNav: NavLink[]
+  ctaButton: { text: string; href: string }
+}
+
+export interface SiteSettingsData {
+  siteName: string
+  siteTagline: string
+  logo: SanityImage
+  footer: FooterData
+}

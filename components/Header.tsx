@@ -2,8 +2,14 @@
 
 import React, { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
+import type { NavLink } from '@/lib/types';
 
-const Header: React.FC = () => {
+interface HeaderProps {
+  navLinks?: NavLink[];
+  ctaButton?: { text: string; href: string };
+}
+
+const Header: React.FC<HeaderProps> = ({ navLinks: navLinksData, ctaButton }) => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -15,12 +21,15 @@ const Header: React.FC = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const navLinks = [
-    { name: 'Diensten', href: '#diensten' },
-    { name: 'Assortiment', href: '#assortiment' },
-    { name: 'Over ons', href: '#over-ons' },
-    { name: 'Contact', href: '#contact' },
+  const navLinks = navLinksData || [
+    { text: 'Diensten', href: '#diensten' },
+    { text: 'Assortiment', href: '#assortiment' },
+    { text: 'Over ons', href: '#over-ons' },
+    { text: 'Contact', href: '#contact' },
   ];
+
+  const ctaText = ctaButton?.text || 'Partner Login';
+  const ctaHref = ctaButton?.href || '#';
 
   return (
     <header 
@@ -41,21 +50,23 @@ const Header: React.FC = () => {
         {/* Desktop Nav */}
         <nav className="hidden md:flex items-center space-x-10">
           {navLinks.map((link) => (
-            <a 
-              key={link.name} 
-              href={link.href} 
+            <a
+              key={link.text}
+              href={link.href}
+              target={link.isExternal ? '_blank' : undefined}
+              rel={link.isExternal ? 'noopener noreferrer' : undefined}
               className="text-xs font-bold uppercase tracking-widest text-sage/70 hover:text-sage transition-colors"
             >
-              {link.name}
+              {link.text}
             </a>
           ))}
         </nav>
 
         {/* Desktop CTA */}
         <div className="hidden md:block">
-          <button className="bg-sage hover:bg-sage-dark text-white px-6 py-3 text-xs font-bold uppercase tracking-widest transition-colors border border-transparent hover:border-sage-dark rounded-md">
-            Partner Login
-          </button>
+          <a href={ctaHref} className="bg-sage hover:bg-sage-dark text-white px-6 py-3 text-xs font-bold uppercase tracking-widest transition-colors border border-transparent hover:border-sage-dark rounded-md">
+            {ctaText}
+          </a>
         </div>
 
         {/* Mobile Menu Toggle */}
@@ -70,18 +81,20 @@ const Header: React.FC = () => {
       {mobileMenuOpen && (
         <div className="md:hidden absolute top-full left-0 right-0 bg-cream border-b border-sage/10 p-6 flex flex-col space-y-4 shadow-lg h-screen">
           {navLinks.map((link) => (
-            <a 
-              key={link.name} 
-              href={link.href} 
+            <a
+              key={link.text}
+              href={link.href}
+              target={link.isExternal ? '_blank' : undefined}
+              rel={link.isExternal ? 'noopener noreferrer' : undefined}
               className="text-3xl font-display font-black uppercase text-sage tracking-tight"
               onClick={() => setMobileMenuOpen(false)}
             >
-              {link.name}
+              {link.text}
             </a>
           ))}
-          <button className="bg-sage text-white w-full py-4 text-center font-bold uppercase tracking-widest mt-8 rounded-md">
-            Partner Login
-          </button>
+          <a href={ctaHref} className="bg-sage text-white w-full py-4 text-center font-bold uppercase tracking-widest mt-8 rounded-md">
+            {ctaText}
+          </a>
         </div>
       )}
     </header>
