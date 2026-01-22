@@ -143,6 +143,22 @@ export const TrustBar = ({ data }: TrustBarProps) => {
     { _id: '5', name: 'Keukenhof' },
   ];
 
+  const PartnerContent = ({ partner }: { partner: typeof partners[0] }) => (
+    <>
+      {partner.logo ? (
+        <img
+          src={urlFor(partner.logo).height(80).url()}
+          alt={partner.name}
+          className="h-8 sm:h-10 w-auto object-contain"
+        />
+      ) : (
+        <span className="text-base sm:text-lg md:text-xl font-display font-bold uppercase text-sage/40 group-hover:text-sage transition-colors">
+          {partner.name}
+        </span>
+      )}
+    </>
+  );
+
   return (
     <div className="bg-cream border-b border-sage/10 py-8 md:py-12">
       <div className="container mx-auto px-4 sm:px-6">
@@ -153,19 +169,21 @@ export const TrustBar = ({ data }: TrustBarProps) => {
           <div className="h-px w-full bg-sage/10 hidden md:block" />
           <div className="flex flex-wrap justify-center md:justify-end items-center gap-4 sm:gap-6 md:gap-12 w-full">
             {partners.map((partner) => (
-              <div key={partner._id} className="hover:opacity-80 transition-opacity cursor-pointer">
-                {partner.logo ? (
-                  <img
-                    src={urlFor(partner.logo).height(40).url()}
-                    alt={partner.name}
-                    className="h-8 sm:h-10 w-auto object-contain"
-                  />
-                ) : (
-                  <span className="text-base sm:text-lg md:text-xl font-display font-bold uppercase text-sage/40 hover:text-sage transition-colors">
-                    {partner.name}
-                  </span>
-                )}
-              </div>
+              partner.website ? (
+                <a
+                  key={partner._id}
+                  href={partner.website}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group hover:opacity-70 transition-opacity"
+                >
+                  <PartnerContent partner={partner} />
+                </a>
+              ) : (
+                <div key={partner._id} className="group">
+                  <PartnerContent partner={partner} />
+                </div>
+              )
             ))}
           </div>
         </div>
@@ -658,7 +676,21 @@ export const CTA = ({ data }: CTAProps) => {
 
   return (
     <section id="contact" className="py-16 md:py-32 bg-sage relative overflow-hidden flex items-center justify-center min-h-[50vh]">
-      <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:64px_64px]" />
+      {/* Soft organic blobs */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <svg className="absolute -top-20 -left-20 w-80 h-80 text-cream opacity-[0.04]" viewBox="0 0 200 200">
+          <path fill="currentColor" d="M45,-58.2C57.6,-49.3,66.5,-34.6,71.1,-18.3C75.7,-2,76,15.9,69.1,30.5C62.2,45.1,48.1,56.4,32.5,63.4C16.9,70.4,-0.2,73.1,-17.8,70.1C-35.4,67.1,-53.5,58.4,-64.3,44.3C-75.1,30.2,-78.6,10.7,-75.3,-7.1C-72,-24.9,-61.9,-41,-47.9,-49.7C-33.9,-58.4,-16.9,-59.7,0.3,-60.1C17.6,-60.5,35.2,-60,45,-58.2Z" transform="translate(100 100)" />
+        </svg>
+        <svg className="absolute top-1/4 -right-16 w-64 h-64 text-cream opacity-[0.03]" viewBox="0 0 200 200">
+          <path fill="currentColor" d="M39.5,-51.2C52.9,-43.5,66.8,-34.1,72.2,-21C77.6,-7.9,74.5,8.9,67.3,23.1C60.1,37.3,48.8,48.9,35.5,56.7C22.2,64.5,6.9,68.5,-8.3,68.1C-23.5,67.7,-38.6,62.9,-50.4,53.5C-62.2,44.1,-70.7,30.1,-73.5,15C-76.3,-0.1,-73.4,-16.3,-65.8,-29.6C-58.2,-42.9,-45.9,-53.3,-32.6,-61C-19.3,-68.7,-5,-73.7,5.4,-80.5C15.8,-87.3,26.1,-58.9,39.5,-51.2Z" transform="translate(100 100)" />
+        </svg>
+        <svg className="absolute -bottom-32 left-1/4 w-96 h-96 text-cream opacity-[0.03]" viewBox="0 0 200 200">
+          <path fill="currentColor" d="M44.3,-52.1C58.1,-44.6,70.5,-31.6,74.5,-16.3C78.5,-1,74.1,16.6,65.1,30.6C56.1,44.6,42.5,55,27.4,61.5C12.3,68,-4.3,70.6,-20.1,67.1C-35.9,63.6,-50.9,54,-60.5,40.3C-70.1,26.6,-74.3,8.8,-71.7,-7.8C-69.1,-24.4,-59.7,-39.8,-46.6,-47.5C-33.5,-55.2,-16.8,-55.2,-0.5,-54.6C15.8,-54,30.5,-59.6,44.3,-52.1Z" transform="translate(100 100)" />
+        </svg>
+        <svg className="absolute top-1/2 left-1/3 w-48 h-48 text-cream opacity-[0.025]" viewBox="0 0 200 200">
+          <path fill="currentColor" d="M47.7,-57.2C59.5,-50.9,65.4,-34.6,68.2,-18.3C71,-2,70.7,14.3,64.1,27.8C57.5,41.3,44.6,52,30.1,58.8C15.6,65.6,-0.5,68.5,-16.8,66.1C-33.1,63.7,-49.6,56,-60.1,43.1C-70.6,30.2,-75.1,12.1,-72.5,-4.5C-69.9,-21.1,-60.2,-36.2,-47.3,-42.4C-34.4,-48.6,-18.3,-45.9,0,-45.9C18.3,-45.9,35.9,-63.5,47.7,-57.2Z" transform="translate(100 100)" />
+        </svg>
+      </div>
 
       <div className="container mx-auto px-4 sm:px-6 text-center relative z-10">
         <FadeIn>

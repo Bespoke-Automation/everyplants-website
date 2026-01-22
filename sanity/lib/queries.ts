@@ -20,7 +20,8 @@ export const homepageQuery = defineQuery(`
       partners[]-> {
         _id,
         name,
-        logo
+        logo,
+        website
       }
     },
     valueProps {

@@ -40,6 +40,7 @@ export interface Partner {
   _id: string
   name: string
   logo?: SanityImage
+  website?: string
 }
 
 export interface TrustBarData {

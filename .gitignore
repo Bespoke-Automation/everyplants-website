@@ -33,3 +33,7 @@ next-env.d.ts
 *.sln
 *.sw?
 .vercel
+
+# Content assets (uploaded to Sanity)
+content/
+*.pdf
