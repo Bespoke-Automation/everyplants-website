@@ -153,8 +153,18 @@ export const TrustBar = ({ data }: TrustBarProps) => {
           <div className="h-px w-full bg-sage/10 hidden md:block" />
           <div className="flex flex-wrap justify-center md:justify-end items-center gap-4 sm:gap-6 md:gap-12 w-full">
             {partners.map((partner) => (
-              <div key={partner._id} className="text-base sm:text-lg md:text-xl font-display font-bold uppercase text-sage/40 hover:text-sage transition-colors cursor-pointer">
-                {partner.name}
+              <div key={partner._id} className="hover:opacity-80 transition-opacity cursor-pointer">
+                {partner.logo ? (
+                  <img
+                    src={urlFor(partner.logo).height(40).url()}
+                    alt={partner.name}
+                    className="h-8 sm:h-10 w-auto object-contain"
+                  />
+                ) : (
+                  <span className="text-base sm:text-lg md:text-xl font-display font-bold uppercase text-sage/40 hover:text-sage transition-colors">
+                    {partner.name}
+                  </span>
+                )}
               </div>
             ))}
           </div>
