@@ -16,6 +16,21 @@ import type {
   CTAData,
 } from '@/lib/types';
 
+// Helper function to render text with the last word in accent font
+// Single words are returned as-is (no accent)
+const accentLastWord = (text: string): React.ReactNode => {
+  const words = text.trim().split(/\s+/);
+  if (words.length === 1) {
+    return text;
+  }
+  const lastWord = words.pop();
+  return (
+    <>
+      {words.join(' ')} <span className="font-accent">{lastWord}</span>
+    </>
+  );
+};
+
 // --- Rotating Badge Component ---
 const RotatingBadge = () => (
   <div className="absolute top-0 right-0 md:-right-8 md:-top-8 z-20 hidden md:block">
@@ -70,7 +85,7 @@ export const Hero = ({ data }: HeroProps) => {
                     <br />
                   </React.Fragment>
                 ))}
-                <span className="text-sage/40">{highlightedLine}</span>
+                <span className="text-sage/40">{accentLastWord(highlightedLine)}</span>
               </h1>
             </FadeIn>
 
@@ -201,7 +216,7 @@ export const ValueProps = ({ data }: ValuePropsProps) => {
             <h2 className="text-3xl sm:text-4xl md:text-6xl font-display font-black uppercase text-sage tracking-tighter">
               {title}
               <br />
-              {subtitle}
+              {accentLastWord(subtitle)}
             </h2>
             <div className="flex items-center gap-2 text-sage mt-4 md:mt-0 font-mono text-xs uppercase">
               <MousePointer2 size={14} />
@@ -327,7 +342,7 @@ export const HowItWorks = ({ data }: HowItWorksProps) => {
       <div className="container mx-auto px-6 md:px-12">
         <FadeIn>
           <div className="mb-24 flex flex-col md:flex-row justify-between items-end border-b border-cream/20 pb-8">
-            <h2 className="text-4xl md:text-7xl font-display font-black uppercase tracking-tighter">{title}</h2>
+            <h2 className="text-4xl md:text-7xl font-display font-black uppercase tracking-tighter">{accentLastWord(title)}</h2>
             <p className="text-cream/60 text-sm font-mono uppercase tracking-widest max-w-sm text-right mt-4 md:mt-0">{subtitle}</p>
           </div>
         </FadeIn>
@@ -355,7 +370,7 @@ export const HowItWorks = ({ data }: HowItWorksProps) => {
                     </div>
 
                     <div>
-                      <h3 className="text-3xl md:text-5xl font-display font-bold uppercase mb-4 tracking-tight">{step.title}</h3>
+                      <h3 className="text-3xl md:text-5xl font-display font-bold uppercase mb-4 tracking-tight">{accentLastWord(step.title)}</h3>
                       <p className="text-sage/80 text-lg font-medium leading-relaxed max-w-md">{step.description}</p>
                     </div>
                   </div>
@@ -416,7 +431,7 @@ export const Assortment = ({ data }: AssortmentProps) => {
       <div className="container mx-auto px-4 sm:px-6 md:px-12">
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 md:mb-16 gap-6 md:gap-8 border-b border-sage/10 pb-6 md:pb-8">
           <FadeIn>
-            <h2 className="text-3xl sm:text-4xl md:text-6xl font-display font-black uppercase text-sage tracking-tighter">{title}</h2>
+            <h2 className="text-3xl sm:text-4xl md:text-6xl font-display font-black uppercase text-sage tracking-tighter">{accentLastWord(title)}</h2>
           </FadeIn>
           <FadeIn delay={200}>
             <div className="flex flex-col md:items-end">
@@ -535,7 +550,7 @@ export const About = ({ data }: AboutProps) => {
           <div className="md:w-1/2 order-1 md:order-2 flex flex-col justify-center">
             <FadeIn>
               <div className="text-xs font-bold uppercase tracking-widest text-sage/50 mb-3 sm:mb-4">{label}</div>
-              <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-display font-black text-sage mb-6 md:mb-8 uppercase tracking-tighter leading-none whitespace-pre-line">{title}</h2>
+              <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-display font-black text-sage mb-6 md:mb-8 uppercase tracking-tighter leading-none whitespace-pre-line">{accentLastWord(title.replace(/\n/g, ' '))}</h2>
               <p className="text-sage/80 text-base sm:text-lg leading-relaxed mb-6 md:mb-8 font-medium max-w-md">{description}</p>
               <div className="grid grid-cols-1 gap-3 sm:gap-4 mb-8 md:mb-10 border-t border-sage/10 pt-4 sm:pt-6">
                 {features.map((item, i) => (
@@ -637,7 +652,7 @@ export const CTA = ({ data }: CTAProps) => {
 
       <div className="container mx-auto px-4 sm:px-6 text-center relative z-10">
         <FadeIn>
-          <h2 className="text-3xl sm:text-4xl md:text-6xl lg:text-8xl font-display font-black text-cream mb-6 md:mb-8 uppercase tracking-tighter whitespace-pre-line">{title}</h2>
+          <h2 className="text-3xl sm:text-4xl md:text-6xl lg:text-8xl font-display font-black text-cream mb-6 md:mb-8 uppercase tracking-tighter whitespace-pre-line">{accentLastWord(title.replace(/\n/g, ' '))}</h2>
           <p className="text-cream/60 text-base sm:text-lg mb-8 md:mb-12 max-w-xl mx-auto font-medium">{subtitle}</p>
           <div className="flex flex-col sm:flex-row justify-center gap-3 sm:gap-4">
             <a href={primaryButton.href} className="bg-cream text-sage hover:bg-white px-8 sm:px-10 py-4 sm:py-5 text-sm font-bold uppercase tracking-widest transition-transform hover:-translate-y-1 shadow-xl rounded-md">

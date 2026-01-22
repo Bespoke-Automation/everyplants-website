@@ -22,6 +22,7 @@ const config: Config = {
       fontFamily: {
         sans: ['var(--font-inter)', 'sans-serif'],
         display: ['var(--font-archivo)', 'sans-serif'],
+        accent: ['"Tan Mon Cheri"', 'serif'],
       },
       letterSpacing: {
         tighter: '-0.05em',

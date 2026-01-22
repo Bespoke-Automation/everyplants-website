@@ -2,6 +2,21 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Tan Mon Cheri - Accent font for headings */
+@font-face {
+  font-family: 'Tan Mon Cheri';
+  src: url('/fonts/tan-mon-cheri.woff2') format('woff2'),
+       url('/fonts/tan-mon-cheri.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Scale down accent font to match Archivo's visual height */
+.font-accent {
+  font-size: 0.68em;
+}
+
 body {
   background-color: #F0F1F0;
   color: #0F2820;
