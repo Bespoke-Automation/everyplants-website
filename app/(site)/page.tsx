@@ -12,7 +12,7 @@ import {
   Testimonial,
   CTA,
 } from '@/components/HomeSections'
-import { client } from '@/sanity/lib/client'
+import { sanityFetch } from '@/sanity/lib/live'
 import { homepageQuery, navigationQuery, siteSettingsQuery } from '@/sanity/lib/queries'
 import type { HomepageData, NavigationData, SiteSettingsData } from '@/lib/types'
 
@@ -21,9 +21,9 @@ export const revalidate = 60
 async function getSanityData() {
   try {
     const [homepage, navigation, siteSettings] = await Promise.all([
-      client.fetch<HomepageData>(homepageQuery),
-      client.fetch<NavigationData>(navigationQuery),
-      client.fetch<SiteSettingsData>(siteSettingsQuery),
+      sanityFetch<HomepageData>({ query: homepageQuery }),
+      sanityFetch<NavigationData>({ query: navigationQuery }),
+      sanityFetch<SiteSettingsData>({ query: siteSettingsQuery }),
     ])
     return { homepage, navigation, siteSettings }
   } catch (error) {

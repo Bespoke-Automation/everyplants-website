@@ -1,6 +1,6 @@
-import { groq } from 'next-sanity'
+import { defineQuery } from 'next-sanity'
 
-export const homepageQuery = groq`
+export const homepageQuery = defineQuery(`
   *[_type == "homepage"][0] {
     hero {
       badge,
@@ -90,9 +90,9 @@ export const homepageQuery = groq`
       ogImage
     }
   }
-`
+`)
 
-export const navigationQuery = groq`
+export const navigationQuery = defineQuery(`
   *[_type == "navigation"][0] {
     mainNav[] {
       text,
@@ -104,9 +104,9 @@ export const navigationQuery = groq`
       href
     }
   }
-`
+`)
 
-export const siteSettingsQuery = groq`
+export const siteSettingsQuery = defineQuery(`
   *[_type == "siteSettings"][0] {
     siteName,
     siteTagline,
@@ -134,4 +134,4 @@ export const siteSettingsQuery = groq`
       locationTag
     }
   }
-`
+`)

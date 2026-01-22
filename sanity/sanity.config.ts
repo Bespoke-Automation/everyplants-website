@@ -1,5 +1,6 @@
 import { defineConfig } from 'sanity'
 import { structureTool } from 'sanity/structure'
+import { presentationTool } from 'sanity/presentation'
 import { schemaTypes } from './schemas'
 
 const singletonTypes = new Set(['siteSettings', 'homepage', 'navigation'])
@@ -38,6 +39,13 @@ export default defineConfig({
             S.documentTypeListItem('partner').title('Partners'),
             S.documentTypeListItem('testimonial').title('Testimonials'),
           ]),
+    }),
+    presentationTool({
+      previewUrl: {
+        draftMode: {
+          enable: '/api/draft-mode/enable',
+        },
+      },
     }),
   ],
 

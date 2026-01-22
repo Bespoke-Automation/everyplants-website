@@ -1,9 +1,15 @@
 import './globals.css'
+import { VisualEditing } from 'next-sanity/visual-editing'
+import { draftMode } from 'next/headers'
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  const { isEnabled } = await draftMode()
   return (
     <html lang="nl">
-      <body>{children}</body>
+      <body>
+        {children}
+        {isEnabled && <VisualEditing />}
+      </body>
     </html>
   )
 }
