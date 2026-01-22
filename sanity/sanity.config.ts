@@ -46,6 +46,31 @@ export default defineConfig({
           enable: '/api/draft-mode/enable',
         },
       },
+      resolve: {
+        mainDocuments: [
+          {
+            route: '/',
+            filter: `_type == "homepage"`,
+          },
+        ],
+        locations: {
+          homepage: {
+            locations: [{ title: 'Homepage', href: '/' }],
+          },
+          navigation: {
+            locations: [{ title: 'Homepage', href: '/' }],
+          },
+          siteSettings: {
+            locations: [{ title: 'Homepage', href: '/' }],
+          },
+          partner: {
+            locations: [{ title: 'Homepage', href: '/' }],
+          },
+          testimonial: {
+            locations: [{ title: 'Homepage', href: '/' }],
+          },
+        },
+      },
     }),
   ],
 
