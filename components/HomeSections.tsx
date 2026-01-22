@@ -54,16 +54,16 @@ export const Hero = ({ data }: HeroProps) => {
   const heroImageAlt = data?.heroImageAlt || 'Modern industrial greenhouse facility';
 
   return (
-    <section className="relative pt-32 pb-12 md:pt-48 md:pb-32 bg-cream min-h-[90vh] flex items-center border-b border-sage/10 overflow-x-clip">
-      <div className="container mx-auto px-6 md:px-12">
-        <div className="flex flex-col lg:flex-row gap-12 lg:gap-24 items-center">
+    <section className="relative pt-24 pb-12 md:pt-40 lg:pt-48 md:pb-32 bg-cream min-h-[90vh] flex items-center border-b border-sage/10 overflow-x-clip">
+      <div className="container mx-auto px-4 sm:px-6 md:px-12">
+        <div className="flex flex-col lg:flex-row gap-10 lg:gap-24 items-center">
           {/* Text Column */}
-          <div className="lg:w-1/2 space-y-10 z-10 relative">
+          <div className="lg:w-1/2 space-y-8 md:space-y-10 z-10 relative">
             <FadeIn>
               <div className="inline-block border border-sage/30 px-3 py-1 text-xs font-bold uppercase tracking-widest text-sage mb-4 rounded-md">
                 {badge}
               </div>
-              <h1 className="text-6xl md:text-8xl font-display font-black uppercase tracking-tighter text-sage leading-[0.85]">
+              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-display font-black uppercase tracking-tighter text-sage leading-[0.85]">
                 {headlineLines.map((line, i) => (
                   <React.Fragment key={i}>
                     {line}
@@ -75,14 +75,14 @@ export const Hero = ({ data }: HeroProps) => {
             </FadeIn>
 
             <FadeIn delay={200}>
-              <p className="text-lg md:text-xl text-sage/80 font-sans font-medium max-w-lg leading-relaxed border-l-4 border-sage pl-6">
+              <p className="text-base sm:text-lg md:text-xl text-sage/80 font-sans font-medium max-w-lg leading-relaxed border-l-4 border-sage pl-4 sm:pl-6">
                 {tagline}
               </p>
             </FadeIn>
 
             <FadeIn delay={400}>
               <div className="flex flex-col sm:flex-row gap-0 pt-4">
-                <a href={ctaLink} className="bg-sage hover:bg-sage-dark text-white px-10 py-5 text-base font-bold uppercase tracking-wider transition-all hover:translate-x-1 flex items-center justify-center gap-4 group rounded-md">
+                <a href={ctaLink} className="bg-sage hover:bg-sage-dark text-white px-8 sm:px-10 py-4 sm:py-5 text-sm sm:text-base font-bold uppercase tracking-wider transition-all hover:translate-x-1 flex items-center justify-center gap-4 group rounded-md">
                   {ctaText}
                   <ArrowRight size={18} />
                 </a>
@@ -91,17 +91,17 @@ export const Hero = ({ data }: HeroProps) => {
           </div>
 
           {/* Image Column */}
-          <div className="lg:w-1/2 relative">
+          <div className="lg:w-1/2 relative w-full">
             <div className="relative animate-in fade-in zoom-in duration-1000">
               <RotatingBadge />
-              <div className="aspect-[4/5] relative overflow-hidden shadow-2xl border-2 border-sage/10 bg-sage/5 rounded-lg">
+              <div className="aspect-[4/5] sm:aspect-[4/5] relative overflow-hidden shadow-2xl border-2 border-sage/10 bg-sage/5 rounded-lg">
                 <img
                   src={imageUrl}
                   alt={heroImageAlt}
                   className="w-full h-full object-cover object-center scale-105 hover:scale-100 transition-transform duration-[1.5s]"
                   loading="eager"
                 />
-                <div className="absolute bottom-0 left-0 bg-white border-t border-r border-sage/20 px-6 py-4 text-sage font-bold uppercase text-xs tracking-widest z-10 rounded-tr-md">
+                <div className="absolute bottom-0 left-0 bg-white border-t border-r border-sage/20 px-4 sm:px-6 py-3 sm:py-4 text-sage font-bold uppercase text-[10px] sm:text-xs tracking-widest z-10 rounded-tr-md">
                   {imageCaption}
                 </div>
               </div>
@@ -129,16 +129,16 @@ export const TrustBar = ({ data }: TrustBarProps) => {
   ];
 
   return (
-    <div className="bg-cream border-b border-sage/10 py-12">
-      <div className="container mx-auto px-6">
-        <div className="flex flex-col md:flex-row items-center gap-8 md:gap-16">
-          <div className="text-xs font-bold tracking-widest text-sage/50 uppercase whitespace-nowrap">
+    <div className="bg-cream border-b border-sage/10 py-8 md:py-12">
+      <div className="container mx-auto px-4 sm:px-6">
+        <div className="flex flex-col md:flex-row items-center gap-6 md:gap-16">
+          <div className="text-[10px] sm:text-xs font-bold tracking-widest text-sage/50 uppercase whitespace-nowrap">
             {label}
           </div>
           <div className="h-px w-full bg-sage/10 hidden md:block" />
-          <div className="flex flex-wrap justify-center md:justify-end items-center gap-8 md:gap-12 w-full">
+          <div className="flex flex-wrap justify-center md:justify-end items-center gap-4 sm:gap-6 md:gap-12 w-full">
             {partners.map((partner) => (
-              <div key={partner._id} className="text-xl font-display font-bold uppercase text-sage/40 hover:text-sage transition-colors cursor-pointer">
+              <div key={partner._id} className="text-base sm:text-lg md:text-xl font-display font-bold uppercase text-sage/40 hover:text-sage transition-colors cursor-pointer">
                 {partner.name}
               </div>
             ))}
@@ -168,7 +168,12 @@ const getIcon = (iconName: string) => {
 };
 
 export const ValueProps = ({ data }: ValuePropsProps) => {
-  const [activeId, setActiveId] = useState<number>(1);
+  const [activeId, setActiveId] = useState<number>(0);
+
+  // Handle tap-to-toggle for touch devices
+  const handleInteraction = (idx: number) => {
+    setActiveId(prevId => prevId === idx ? -1 : idx);
+  };
 
   const defaultImages = [
     'https://images.unsplash.com/photo-1628135899981-d70a36a7a513?q=80&w=2670&auto=format&fit=crop',
@@ -189,29 +194,75 @@ export const ValueProps = ({ data }: ValuePropsProps) => {
   const ctaText = data?.ctaText || 'Meer info';
 
   return (
-    <section id="diensten" className="py-24 bg-cream border-b border-sage/10">
-      <div className="container mx-auto px-6 md:px-12">
+    <section id="diensten" className="py-16 md:py-24 bg-cream border-b border-sage/10">
+      <div className="container mx-auto px-4 sm:px-6 md:px-12">
         <FadeIn>
-          <div className="flex flex-col md:flex-row justify-between items-end mb-12 border-b-2 border-sage pb-6">
-            <h2 className="text-4xl md:text-6xl font-display font-black uppercase text-sage tracking-tighter">
+          <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-8 md:mb-12 border-b-2 border-sage pb-4 md:pb-6">
+            <h2 className="text-3xl sm:text-4xl md:text-6xl font-display font-black uppercase text-sage tracking-tighter">
               {title}
               <br />
               {subtitle}
             </h2>
             <div className="flex items-center gap-2 text-sage mt-4 md:mt-0 font-mono text-xs uppercase">
               <MousePointer2 size={14} />
-              <span>{instructionText}</span>
+              <span className="hidden sm:inline">{instructionText}</span>
+              <span className="sm:hidden">Tap to explore</span>
             </div>
           </div>
         </FadeIn>
 
-        <div className="flex flex-col md:flex-row h-[600px] w-full border border-sage/10 bg-white rounded-lg overflow-hidden">
+        {/* Mobile Layout: Vertical expandable cards */}
+        <div className="flex flex-col md:hidden gap-4">
+          {items.map((prop, idx) => {
+            const imgUrl = prop.image ? urlFor(prop.image).width(800).quality(80).url() : defaultImages[idx] || defaultImages[0];
+            const isActive = activeId === idx;
+            return (
+              <div
+                key={idx}
+                onClick={() => handleInteraction(idx)}
+                className={`relative overflow-hidden transition-all duration-300 ease-out cursor-pointer border border-sage/10 rounded-lg ${
+                  isActive ? 'bg-sage text-cream' : 'bg-white text-sage'
+                }`}
+              >
+                {/* Background image - only show when active */}
+                <div className={`absolute inset-0 transition-opacity duration-300 ${isActive ? 'opacity-20' : 'opacity-0'}`}>
+                  <img src={imgUrl} alt={prop.title} className="w-full h-full object-cover grayscale" />
+                </div>
+
+                <div className="relative z-10 p-5 sm:p-6">
+                  <div className="flex items-center gap-4 mb-2">
+                    <div className={`p-2 border border-current rounded-md ${isActive ? 'bg-cream/10' : 'bg-sage/5'}`}>
+                      {getIcon(prop.icon)}
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <span className="uppercase tracking-widest text-[10px] font-bold block opacity-70">{prop.subtitle}</span>
+                      <h3 className="text-xl sm:text-2xl font-display font-bold uppercase tracking-tight truncate">{prop.title}</h3>
+                    </div>
+                    <ArrowRight size={20} className={`flex-shrink-0 transition-transform duration-300 ${isActive ? 'rotate-90' : ''}`} />
+                  </div>
+
+                  {/* Expandable content */}
+                  <div className={`overflow-hidden transition-all duration-300 ${isActive ? 'max-h-40 opacity-100 mt-4' : 'max-h-0 opacity-0'}`}>
+                    <p className="text-sm leading-relaxed opacity-90 font-medium">{prop.description}</p>
+                    <div className="mt-4 flex items-center gap-2 font-bold text-xs uppercase tracking-widest">
+                      {ctaText} <ArrowRight size={14} />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+
+        {/* Desktop Layout: Horizontal accordion with hover + click */}
+        <div className="hidden md:flex h-[500px] lg:h-[600px] w-full border border-sage/10 bg-white rounded-lg overflow-hidden">
           {items.map((prop, idx) => {
             const imgUrl = prop.image ? urlFor(prop.image).width(800).quality(80).url() : defaultImages[idx] || defaultImages[0];
             return (
               <div
                 key={idx}
                 onMouseEnter={() => setActiveId(idx)}
+                onClick={() => handleInteraction(idx)}
                 className={`relative overflow-hidden transition-all duration-500 ease-out cursor-pointer group border-r border-sage/10 last:border-r-0 ${
                   activeId === idx ? 'flex-[3] bg-sage text-cream' : 'flex-1 bg-white text-sage'
                 }`}
@@ -220,7 +271,7 @@ export const ValueProps = ({ data }: ValuePropsProps) => {
                   <img src={imgUrl} alt={prop.title} className="w-full h-full object-cover grayscale" />
                 </div>
 
-                <div className="absolute inset-0 p-8 flex flex-col justify-between">
+                <div className="absolute inset-0 p-6 lg:p-8 flex flex-col justify-between">
                   <div className="flex justify-between items-start">
                     <div className={`p-2 border border-current rounded-md ${activeId === idx ? 'bg-cream/10' : 'bg-sage/5'}`}>
                       {getIcon(prop.icon)}
@@ -229,9 +280,9 @@ export const ValueProps = ({ data }: ValuePropsProps) => {
 
                   <div className="relative z-10">
                     <span className="uppercase tracking-widest text-[10px] font-bold mb-2 block opacity-70">{prop.subtitle}</span>
-                    <h3 className="text-2xl md:text-4xl font-display font-bold uppercase mb-4 whitespace-nowrap tracking-tight">{prop.title}</h3>
+                    <h3 className="text-2xl lg:text-4xl font-display font-bold uppercase mb-4 whitespace-nowrap tracking-tight">{prop.title}</h3>
                     <div className={`overflow-hidden transition-all duration-500 ${activeId === idx ? 'max-h-40 opacity-100' : 'max-h-0 opacity-0'}`}>
-                      <p className="text-sm md:text-base leading-relaxed max-w-md opacity-90 font-medium">{prop.description}</p>
+                      <p className="text-sm lg:text-base leading-relaxed max-w-md opacity-90 font-medium">{prop.description}</p>
                       <div className="mt-6 flex items-center gap-2 font-bold text-xs uppercase tracking-widest">
                         {ctaText} <ArrowRight size={14} />
                       </div>
@@ -272,16 +323,51 @@ export const HowItWorks = ({ data }: HowItWorksProps) => {
   const subtitle = data?.subtitle || 'Systematisch van installatie tot levering.';
 
   return (
-    <section className="py-32 bg-sage text-cream border-t border-b border-sage/20">
-      <div className="container mx-auto px-6 md:px-12">
+    <section className="py-16 md:py-32 bg-sage text-cream border-t border-b border-sage/20">
+      <div className="container mx-auto px-4 sm:px-6 md:px-12">
         <FadeIn>
-          <div className="mb-24 flex flex-col md:flex-row justify-between items-end border-b border-cream/20 pb-8">
-            <h2 className="text-4xl md:text-7xl font-display font-black uppercase tracking-tighter">{title}</h2>
-            <p className="text-cream/60 text-sm font-mono uppercase tracking-widest max-w-sm text-right mt-4 md:mt-0">{subtitle}</p>
+          <div className="mb-12 md:mb-24 flex flex-col md:flex-row justify-between items-start md:items-end border-b border-cream/20 pb-6 md:pb-8">
+            <h2 className="text-3xl sm:text-4xl md:text-7xl font-display font-black uppercase tracking-tighter">{title}</h2>
+            <p className="text-cream/60 text-sm font-mono uppercase tracking-widest max-w-sm md:text-right mt-4 md:mt-0">{subtitle}</p>
           </div>
         </FadeIn>
 
-        <div className="max-w-6xl mx-auto relative pb-24">
+        {/* Mobile Layout: Simple stacked cards without sticky */}
+        <div className="md:hidden space-y-6">
+          {steps.map((step, idx) => {
+            const imgUrl = step.image ? urlFor(step.image).width(1200).quality(80).url() : defaultImages[idx] || defaultImages[0];
+            return (
+              <FadeIn key={idx} delay={idx * 100}>
+                <div className="bg-cream text-sage overflow-hidden rounded-lg border border-sage/20 shadow-lg">
+                  {/* Image section - top on mobile */}
+                  <div className="relative h-40 sm:h-48 overflow-hidden">
+                    <img
+                      src={imgUrl}
+                      alt={step.title}
+                      className="w-full h-full object-cover grayscale"
+                    />
+                    <div className="absolute inset-0 bg-sage/10 mix-blend-multiply" />
+                    <span className="absolute top-4 left-4 text-4xl font-display font-black text-sage/20 select-none">{step.number}</span>
+                  </div>
+
+                  {/* Content section */}
+                  <div className="p-5 sm:p-6">
+                    <div className="flex justify-between items-start mb-3">
+                      <h3 className="text-2xl sm:text-3xl font-display font-bold uppercase tracking-tight">{step.title}</h3>
+                      <div className="p-2 border border-sage/10 rounded-md flex-shrink-0">
+                        <ArrowRight className="rotate-45" size={16} />
+                      </div>
+                    </div>
+                    <p className="text-sage/80 text-base font-medium leading-relaxed">{step.description}</p>
+                  </div>
+                </div>
+              </FadeIn>
+            );
+          })}
+        </div>
+
+        {/* Desktop Layout: Sticky stacking cards */}
+        <div className="hidden md:block max-w-6xl mx-auto relative pb-24">
           {steps.map((step, idx) => {
             const imgUrl = step.image ? urlFor(step.image).width(1200).quality(80).url() : defaultImages[idx] || defaultImages[0];
             return (
@@ -289,27 +375,27 @@ export const HowItWorks = ({ data }: HowItWorksProps) => {
                 key={idx}
                 className="sticky transition-all duration-300"
                 style={{
-                  top: `${140 + idx * 50}px`,
+                  top: `${120 + idx * 40}px`,
                   marginBottom: `${(steps.length - idx - 1) * 20}px`,
                   zIndex: idx + 1,
                 }}
               >
-                <div className="bg-cream text-sage p-0 h-[450px] md:h-[500px] flex flex-col md:flex-row shadow-2xl border border-sage/20 overflow-hidden relative rounded-lg">
-                  <div className="w-full md:w-1/2 p-8 md:p-12 relative z-10 flex flex-col justify-between border-b md:border-b-0 md:border-r border-sage/10">
+                <div className="bg-cream text-sage p-0 h-[450px] lg:h-[500px] flex flex-row shadow-2xl border border-sage/20 overflow-hidden relative rounded-lg">
+                  <div className="w-1/2 p-8 lg:p-12 relative z-10 flex flex-col justify-between border-r border-sage/10">
                     <div className="flex justify-between items-start">
-                      <span className="text-5xl md:text-7xl font-display font-black text-sage/10 select-none">{step.number}</span>
+                      <span className="text-5xl lg:text-7xl font-display font-black text-sage/10 select-none">{step.number}</span>
                       <div className="p-2 border border-sage/10 rounded-md">
                         <ArrowRight className="rotate-45" />
                       </div>
                     </div>
 
                     <div>
-                      <h3 className="text-3xl md:text-5xl font-display font-bold uppercase mb-4 tracking-tight">{step.title}</h3>
-                      <p className="text-sage/80 text-lg font-medium leading-relaxed max-w-md">{step.description}</p>
+                      <h3 className="text-3xl lg:text-5xl font-display font-bold uppercase mb-4 tracking-tight">{step.title}</h3>
+                      <p className="text-sage/80 text-base lg:text-lg font-medium leading-relaxed max-w-md">{step.description}</p>
                     </div>
                   </div>
 
-                  <div className="w-full md:w-1/2 h-full relative group overflow-hidden">
+                  <div className="w-1/2 h-full relative group overflow-hidden">
                     <img src={imgUrl} alt={step.title} className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 scale-100 group-hover:scale-105" />
                     <div className="absolute inset-0 bg-sage/10 mix-blend-multiply" />
                   </div>
@@ -329,6 +415,13 @@ interface AssortmentProps {
 }
 
 export const Assortment = ({ data }: AssortmentProps) => {
+  const [activeCardIdx, setActiveCardIdx] = useState<number | null>(null);
+
+  // Handle tap-to-toggle for touch devices
+  const handleCardTap = (idx: number) => {
+    setActiveCardIdx(prevIdx => prevIdx === idx ? null : idx);
+  };
+
   const defaultImages = [
     'https://images.unsplash.com/photo-1614594975525-e45190c55d0b?q=80&w=1364&auto=format&fit=crop',
     'https://images.unsplash.com/photo-1599598425947-320d3d52623d?q=80&w=1336&auto=format&fit=crop',
@@ -354,32 +447,76 @@ export const Assortment = ({ data }: AssortmentProps) => {
   const ctaLink = data?.ctaLink || '#';
 
   return (
-    <section id="assortiment" className="py-24 bg-cream">
-      <div className="container mx-auto px-6 md:px-12">
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-8 border-b border-sage/10 pb-8">
+    <section id="assortiment" className="py-16 md:py-24 bg-cream">
+      <div className="container mx-auto px-4 sm:px-6 md:px-12">
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 md:mb-16 gap-6 md:gap-8 border-b border-sage/10 pb-6 md:pb-8">
           <FadeIn>
-            <h2 className="text-4xl md:text-6xl font-display font-black uppercase text-sage tracking-tighter">{title}</h2>
+            <h2 className="text-3xl sm:text-4xl md:text-6xl font-display font-black uppercase text-sage tracking-tighter">{title}</h2>
           </FadeIn>
           <FadeIn delay={200}>
-            <div className="flex flex-col items-end">
-              <div className="max-w-xs text-sage/70 mb-4 text-right text-sm font-medium">{description}</div>
-              <a href={ctaLink} className="inline-flex items-center gap-2 bg-sage text-white px-6 py-3 text-xs font-bold uppercase tracking-widest hover:bg-sage-dark transition-colors rounded-md">
+            <div className="flex flex-col md:items-end">
+              <div className="max-w-xs text-sage/70 mb-4 md:text-right text-sm font-medium">{description}</div>
+              <a href={ctaLink} className="inline-flex items-center gap-2 bg-sage text-white px-6 py-3 text-xs font-bold uppercase tracking-widest hover:bg-sage-dark transition-colors rounded-md w-fit">
                 {ctaText} <ArrowRight size={14} />
               </a>
             </div>
           </FadeIn>
         </div>
 
-        <div className="columns-1 md:columns-2 lg:columns-3 gap-6 space-y-6">
+        {/* Mobile: 2-column grid with tap-to-toggle */}
+        <div className="grid grid-cols-2 gap-3 sm:gap-4 md:hidden">
           {categories.map((cat, idx) => {
             const imgUrl = cat.image ? urlFor(cat.image).width(800).quality(80).url() : defaultImages[idx] || defaultImages[0];
-            const height = cat.height || defaultHeights[idx] || 'h-72 md:h-[400px]';
+            const isActive = activeCardIdx === idx;
+            return (
+              <FadeIn key={idx} delay={idx * 50}>
+                <div
+                  className="relative h-40 sm:h-48 w-full overflow-hidden bg-sage/5 cursor-pointer border border-sage/5 rounded-lg"
+                  onClick={() => handleCardTap(idx)}
+                >
+                  <img
+                    src={imgUrl}
+                    alt={cat.name}
+                    className={`w-full h-full object-cover transition-all duration-500 ${isActive ? 'grayscale-0 scale-105' : 'grayscale'}`}
+                  />
+
+                  {/* Category name badge - visible when not active */}
+                  <div className={`absolute top-2 left-2 bg-white/90 backdrop-blur-sm px-2 py-1 rounded text-sage text-[10px] font-bold uppercase tracking-wide transition-opacity duration-300 ${isActive ? 'opacity-0' : 'opacity-100'}`}>
+                    {cat.name}
+                  </div>
+
+                  {/* Overlay - shown on tap */}
+                  <div className={`absolute bottom-0 left-0 right-0 p-3 sm:p-4 bg-sage/90 backdrop-blur-sm transition-transform duration-300 rounded-b-lg ${isActive ? 'translate-y-0' : 'translate-y-full'}`}>
+                    <div className="flex items-center justify-between text-white">
+                      <span className="font-display font-bold uppercase tracking-wider text-xs sm:text-sm">{cat.name}</span>
+                      <ArrowRight size={14} />
+                    </div>
+                  </div>
+                </div>
+              </FadeIn>
+            );
+          })}
+        </div>
+
+        {/* Desktop: Masonry layout with hover + click */}
+        <div className="hidden md:block columns-2 lg:columns-3 gap-6 space-y-6">
+          {categories.map((cat, idx) => {
+            const imgUrl = cat.image ? urlFor(cat.image).width(800).quality(80).url() : defaultImages[idx] || defaultImages[0];
+            const height = cat.height || defaultHeights[idx] || 'h-72 lg:h-[400px]';
+            const isActive = activeCardIdx === idx;
             return (
               <FadeIn key={idx} delay={idx * 100}>
-                <div className={`group relative ${height} w-full overflow-hidden bg-sage/5 cursor-pointer break-inside-avoid border border-sage/5 hover:border-sage/30 transition-all duration-300 rounded-lg`}>
-                  <img src={imgUrl} alt={cat.name} className="w-full h-full object-cover transition-all duration-700 ease-out grayscale group-hover:grayscale-0" />
+                <div
+                  className={`group relative ${height} w-full overflow-hidden bg-sage/5 cursor-pointer break-inside-avoid border border-sage/5 hover:border-sage/30 transition-all duration-300 rounded-lg`}
+                  onClick={() => handleCardTap(idx)}
+                >
+                  <img
+                    src={imgUrl}
+                    alt={cat.name}
+                    className={`w-full h-full object-cover transition-all duration-700 ease-out ${isActive ? 'grayscale-0' : 'grayscale group-hover:grayscale-0'}`}
+                  />
 
-                  <div className="absolute bottom-0 left-0 right-0 p-6 bg-sage/90 backdrop-blur-sm translate-y-full group-hover:translate-y-0 transition-transform duration-300 rounded-b-lg">
+                  <div className={`absolute bottom-0 left-0 right-0 p-6 bg-sage/90 backdrop-blur-sm transition-transform duration-300 rounded-b-lg ${isActive ? 'translate-y-0' : 'translate-y-full group-hover:translate-y-0'}`}>
                     <div className="flex items-center justify-between text-white">
                       <span className="font-display font-bold uppercase tracking-wider">{cat.name}</span>
                       <ArrowRight size={16} />
@@ -416,35 +553,35 @@ export const About = ({ data }: AboutProps) => {
   const linkHref = data?.linkHref || '#';
 
   return (
-    <section id="over-ons" className="bg-white py-32 border-t border-sage/10">
-      <div className="container mx-auto px-6 md:px-12">
-        <div className="flex flex-col md:flex-row gap-16 items-stretch">
-          <div className="md:w-1/2 order-2 md:order-1 relative min-h-[400px]">
+    <section id="over-ons" className="bg-white py-16 md:py-32 border-t border-sage/10">
+      <div className="container mx-auto px-4 sm:px-6 md:px-12">
+        <div className="flex flex-col md:flex-row gap-10 md:gap-16 items-stretch">
+          <div className="md:w-1/2 order-2 md:order-1 relative min-h-[280px] sm:min-h-[350px] md:min-h-[400px]">
             <FadeIn className="h-full">
-              <div className="relative h-full w-full border border-sage/10 bg-sage/5 p-4 rounded-lg">
+              <div className="relative h-full w-full border border-sage/10 bg-sage/5 p-3 sm:p-4 rounded-lg">
                 <img src={imgUrl} alt={imageAlt} className="w-full h-full object-cover grayscale contrast-125" />
-                <div className="absolute top-8 right-8 bg-sage text-white p-4 text-center border border-white/20 shadow-xl rounded-md">
-                  <div className="text-3xl font-display font-bold">{imageBadge.value}</div>
-                  <div className="text-[10px] uppercase tracking-widest">{imageBadge.label}</div>
+                <div className="absolute top-4 right-4 sm:top-8 sm:right-8 bg-sage text-white p-3 sm:p-4 text-center border border-white/20 shadow-xl rounded-md">
+                  <div className="text-2xl sm:text-3xl font-display font-bold">{imageBadge.value}</div>
+                  <div className="text-[9px] sm:text-[10px] uppercase tracking-widest">{imageBadge.label}</div>
                 </div>
               </div>
             </FadeIn>
           </div>
           <div className="md:w-1/2 order-1 md:order-2 flex flex-col justify-center">
             <FadeIn>
-              <div className="text-xs font-bold uppercase tracking-widest text-sage/50 mb-4">{label}</div>
-              <h2 className="text-4xl md:text-6xl font-display font-black text-sage mb-8 uppercase tracking-tighter leading-none whitespace-pre-line">{title}</h2>
-              <p className="text-sage/80 text-lg leading-relaxed mb-8 font-medium max-w-md">{description}</p>
-              <div className="grid grid-cols-1 gap-4 mb-10 border-t border-sage/10 pt-6">
+              <div className="text-xs font-bold uppercase tracking-widest text-sage/50 mb-3 sm:mb-4">{label}</div>
+              <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-display font-black text-sage mb-6 md:mb-8 uppercase tracking-tighter leading-none whitespace-pre-line">{title}</h2>
+              <p className="text-sage/80 text-base sm:text-lg leading-relaxed mb-6 md:mb-8 font-medium max-w-md">{description}</p>
+              <div className="grid grid-cols-1 gap-3 sm:gap-4 mb-8 md:mb-10 border-t border-sage/10 pt-4 sm:pt-6">
                 {features.map((item, i) => (
-                  <div key={i} className="flex justify-between items-center border-b border-sage/10 pb-4">
-                    <span className="font-bold text-sage uppercase text-sm tracking-wide">{item.title}</span>
-                    <span className="text-sage/50 text-xs font-mono text-right">{item.description}</span>
+                  <div key={i} className="flex justify-between items-center border-b border-sage/10 pb-3 sm:pb-4 gap-4">
+                    <span className="font-bold text-sage uppercase text-xs sm:text-sm tracking-wide">{item.title}</span>
+                    <span className="text-sage/50 text-[10px] sm:text-xs font-mono text-right flex-shrink-0">{item.description}</span>
                   </div>
                 ))}
               </div>
               <div>
-                <a href={linkHref} className="text-sage font-bold uppercase tracking-widest border-b-2 border-sage pb-1 hover:text-sage-dark hover:border-sage-dark transition-colors">
+                <a href={linkHref} className="text-sage font-bold uppercase tracking-widest border-b-2 border-sage pb-1 hover:text-sage-dark hover:border-sage-dark transition-colors text-sm sm:text-base">
                   {linkText}
                 </a>
               </div>
@@ -469,13 +606,13 @@ export const Stats = ({ data }: StatsProps) => {
   ];
 
   return (
-    <section className="py-20 bg-sage text-cream border-t border-cream/10">
-      <div className="container mx-auto px-6 md:px-12">
+    <section className="py-12 md:py-20 bg-sage text-cream border-t border-cream/10">
+      <div className="container mx-auto px-4 sm:px-6 md:px-12">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-0 divide-y md:divide-y-0 md:divide-x divide-cream/10 border border-cream/10 rounded-lg overflow-hidden">
           {stats.map((stat, idx) => (
-            <FadeIn key={idx} delay={idx * 100} className="p-12 text-center group hover:bg-white/5 transition-colors">
-              <div className="text-5xl md:text-7xl font-display font-black mb-2 tracking-tighter">{stat.value}</div>
-              <div className="text-cream/40 uppercase tracking-widest text-xs font-bold">{stat.label}</div>
+            <FadeIn key={idx} delay={idx * 100} className="p-8 sm:p-10 md:p-12 text-center group hover:bg-white/5 transition-colors">
+              <div className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-display font-black mb-2 tracking-tighter">{stat.value}</div>
+              <div className="text-cream/40 uppercase tracking-widest text-[10px] sm:text-xs font-bold">{stat.label}</div>
             </FadeIn>
           ))}
         </div>
@@ -496,18 +633,18 @@ export const Testimonial = ({ data }: TestimonialProps) => {
   const authorCompany = data?.authorCompany || 'Plantura Group';
 
   return (
-    <section className="py-32 bg-cream border-b border-sage/10">
-      <div className="container mx-auto px-6 max-w-4xl text-center relative">
+    <section className="py-16 md:py-32 bg-cream border-b border-sage/10">
+      <div className="container mx-auto px-4 sm:px-6 max-w-4xl text-center relative">
         <FadeIn>
-          <div className="mb-8 flex justify-center">
-            <Quote size={48} className="text-sage/20 fill-sage/10" />
+          <div className="mb-6 md:mb-8 flex justify-center">
+            <Quote size={36} className="sm:w-12 sm:h-12 text-sage/20 fill-sage/10" />
           </div>
-          <blockquote className="text-2xl md:text-4xl font-display font-bold leading-tight mb-12 text-sage uppercase tracking-tight">
+          <blockquote className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-display font-bold leading-tight mb-8 md:mb-12 text-sage uppercase tracking-tight">
             &ldquo;{quote}&rdquo;
           </blockquote>
           <div className="flex flex-col items-center justify-center gap-2">
-            <cite className="not-italic font-bold block text-lg text-sage uppercase tracking-widest">{authorName}</cite>
-            <span className="text-sage/50 text-sm font-mono uppercase">
+            <cite className="not-italic font-bold block text-base sm:text-lg text-sage uppercase tracking-widest">{authorName}</cite>
+            <span className="text-sage/50 text-xs sm:text-sm font-mono uppercase">
               {authorTitle}
               {authorCompany && `, ${authorCompany}`}
             </span>
@@ -530,18 +667,18 @@ export const CTA = ({ data }: CTAProps) => {
   const secondaryButton = data?.secondaryButton || { text: 'Sales Contact', href: '#contact' };
 
   return (
-    <section id="contact" className="py-32 bg-sage relative overflow-hidden flex items-center justify-center min-h-[50vh]">
+    <section id="contact" className="py-16 md:py-32 bg-sage relative overflow-hidden flex items-center justify-center min-h-[50vh]">
       <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:64px_64px]" />
 
-      <div className="container mx-auto px-6 text-center relative z-10">
+      <div className="container mx-auto px-4 sm:px-6 text-center relative z-10">
         <FadeIn>
-          <h2 className="text-5xl md:text-8xl font-display font-black text-cream mb-8 uppercase tracking-tighter whitespace-pre-line">{title}</h2>
-          <p className="text-cream/60 text-lg mb-12 max-w-xl mx-auto font-medium">{subtitle}</p>
-          <div className="flex flex-col sm:flex-row justify-center gap-4">
-            <a href={primaryButton.href} className="bg-cream text-sage hover:bg-white px-10 py-5 text-sm font-bold uppercase tracking-widest transition-transform hover:-translate-y-1 shadow-xl rounded-md">
+          <h2 className="text-3xl sm:text-4xl md:text-6xl lg:text-8xl font-display font-black text-cream mb-6 md:mb-8 uppercase tracking-tighter whitespace-pre-line">{title}</h2>
+          <p className="text-cream/60 text-base sm:text-lg mb-8 md:mb-12 max-w-xl mx-auto font-medium">{subtitle}</p>
+          <div className="flex flex-col sm:flex-row justify-center gap-3 sm:gap-4">
+            <a href={primaryButton.href} className="bg-cream text-sage hover:bg-white px-8 sm:px-10 py-4 sm:py-5 text-sm font-bold uppercase tracking-widest transition-transform hover:-translate-y-1 shadow-xl rounded-md">
               {primaryButton.text}
             </a>
-            <a href={secondaryButton.href} className="bg-transparent border border-cream/20 text-cream hover:bg-cream/10 px-10 py-5 text-sm font-bold uppercase tracking-widest transition-colors rounded-md">
+            <a href={secondaryButton.href} className="bg-transparent border border-cream/20 text-cream hover:bg-cream/10 px-8 sm:px-10 py-4 sm:py-5 text-sm font-bold uppercase tracking-widest transition-colors rounded-md">
               {secondaryButton.text}
             </a>
           </div>
