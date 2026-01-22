@@ -31,6 +31,7 @@ export interface HeroSection {
   ctaText: string
   ctaLink: string
   heroImage: SanityImage
+  heroImageAlt?: string
   imageCaption: string
   badgeText: string
 }
@@ -58,6 +59,8 @@ export interface ValuePropsData {
   title: string
   subtitle: string
   items: ValueProp[]
+  instructionText?: string
+  ctaText?: string
 }
 
 export interface WorkflowStep {
@@ -92,6 +95,7 @@ export interface AboutData {
   title: string
   description: string
   image: SanityImage
+  imageAlt?: string
   imageBadge: { value: string; label: string }
   features: Array<{ title: string; description: string }>
   linkText: string
@@ -124,8 +128,11 @@ export interface FooterData {
   email: string
   certifications: string[]
   socialLinks: SocialLink[]
+  sitemapLabel?: string
   sitemapLinks: NavLink[]
+  legalLabel?: string
   legalLinks: NavLink[]
+  contactLabel?: string
   copyrightText: string
   locationTag: string
 }
@@ -157,5 +164,6 @@ export interface SiteSettingsData {
   siteName: string
   siteTagline: string
   logo: SanityImage
+  logoAlt?: string
   footer: FooterData
 }

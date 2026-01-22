@@ -35,6 +35,7 @@ export default defineType({
         { name: 'ctaText', title: 'CTA Button Text', type: 'string' },
         { name: 'ctaLink', title: 'CTA Button Link', type: 'string' },
         { name: 'heroImage', title: 'Hero Image', type: 'image', options: { hotspot: true } },
+        { name: 'heroImageAlt', title: 'Hero Image Alt Text', type: 'string' },
         { name: 'imageCaption', title: 'Image Caption', type: 'string' },
         { name: 'badgeText', title: 'Rotating Badge Text', type: 'string' },
       ],
@@ -76,6 +77,8 @@ export default defineType({
         { name: 'title', title: 'Section Title', type: 'string' },
         { name: 'subtitle', title: 'Section Subtitle', type: 'string' },
         { name: 'items', title: 'Value Props', type: 'array', of: [{ type: 'valueProp' }] },
+        { name: 'instructionText', title: 'Instruction Text', type: 'string', description: 'e.g. "Interact to explore"' },
+        { name: 'ctaText', title: 'CTA Link Text', type: 'string', description: 'e.g. "Meer info"' },
       ],
     }),
 
@@ -123,6 +126,7 @@ export default defineType({
         { name: 'title', title: 'Section Title', type: 'string' },
         { name: 'description', title: 'Description', type: 'text' },
         { name: 'image', title: 'Image', type: 'image', options: { hotspot: true } },
+        { name: 'imageAlt', title: 'Image Alt Text', type: 'string' },
         {
           name: 'imageBadge',
           title: 'Image Badge',

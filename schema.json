@@ -975,6 +975,13 @@
               },
               "optional": true
             },
+            "heroImageAlt": {
+              "type": "objectAttribute",
+              "value": {
+                "type": "string"
+              },
+              "optional": true
+            },
             "imageCaption": {
               "type": "objectAttribute",
               "value": {
@@ -1101,6 +1108,20 @@
                     "name": "valueProp"
                   }
                 }
+              },
+              "optional": true
+            },
+            "instructionText": {
+              "type": "objectAttribute",
+              "value": {
+                "type": "string"
+              },
+              "optional": true
+            },
+            "ctaText": {
+              "type": "objectAttribute",
+              "value": {
+                "type": "string"
               },
               "optional": true
             }
@@ -1304,6 +1325,13 @@
                     }
                   }
                 }
+              },
+              "optional": true
+            },
+            "imageAlt": {
+              "type": "objectAttribute",
+              "value": {
+                "type": "string"
               },
               "optional": true
             },
@@ -1768,6 +1796,13 @@
         },
         "optional": true
       },
+      "logoAlt": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
+        },
+        "optional": true
+      },
       "seo": {
         "type": "objectAttribute",
         "value": {
@@ -1834,6 +1869,13 @@
               },
               "optional": true
             },
+            "sitemapLabel": {
+              "type": "objectAttribute",
+              "value": {
+                "type": "string"
+              },
+              "optional": true
+            },
             "sitemapLinks": {
               "type": "objectAttribute",
               "value": {
@@ -1856,6 +1898,13 @@
               },
               "optional": true
             },
+            "legalLabel": {
+              "type": "objectAttribute",
+              "value": {
+                "type": "string"
+              },
+              "optional": true
+            },
             "legalLinks": {
               "type": "objectAttribute",
               "value": {
@@ -1875,6 +1924,13 @@
                     "name": "navLink"
                   }
                 }
+              },
+              "optional": true
+            },
+            "contactLabel": {
+              "type": "objectAttribute",
+              "value": {
+                "type": "string"
               },
               "optional": true
             },

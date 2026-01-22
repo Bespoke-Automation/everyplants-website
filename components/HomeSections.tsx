@@ -51,6 +51,7 @@ export const Hero = ({ data }: HeroProps) => {
     ? urlFor(data.heroImage).width(1600).quality(80).url()
     : 'https://images.unsplash.com/photo-1530836369250-ef72a3f5cda8?q=80&w=1600&auto=format&fit=crop';
   const imageCaption = data?.imageCaption || 'Direct Source: Westland';
+  const heroImageAlt = data?.heroImageAlt || 'Modern industrial greenhouse facility';
 
   return (
     <section className="relative pt-32 pb-12 md:pt-48 md:pb-32 bg-cream min-h-[90vh] flex items-center border-b border-sage/10 overflow-x-clip">
@@ -96,7 +97,7 @@ export const Hero = ({ data }: HeroProps) => {
               <div className="aspect-[4/5] relative overflow-hidden shadow-2xl border-2 border-sage/10 bg-sage/5 rounded-lg">
                 <img
                   src={imageUrl}
-                  alt="Modern industrial greenhouse facility"
+                  alt={heroImageAlt}
                   className="w-full h-full object-cover object-center scale-105 hover:scale-100 transition-transform duration-[1.5s]"
                   loading="eager"
                 />
@@ -184,6 +185,8 @@ export const ValueProps = ({ data }: ValuePropsProps) => {
   const items = data?.items || defaultItems;
   const title = data?.title || 'Full Service';
   const subtitle = data?.subtitle || 'Solutions';
+  const instructionText = data?.instructionText || 'Interact to explore';
+  const ctaText = data?.ctaText || 'Meer info';
 
   return (
     <section id="diensten" className="py-24 bg-cream border-b border-sage/10">
@@ -197,7 +200,7 @@ export const ValueProps = ({ data }: ValuePropsProps) => {
             </h2>
             <div className="flex items-center gap-2 text-sage mt-4 md:mt-0 font-mono text-xs uppercase">
               <MousePointer2 size={14} />
-              <span>Interact to explore</span>
+              <span>{instructionText}</span>
             </div>
           </div>
         </FadeIn>
@@ -230,7 +233,7 @@ export const ValueProps = ({ data }: ValuePropsProps) => {
                     <div className={`overflow-hidden transition-all duration-500 ${activeId === idx ? 'max-h-40 opacity-100' : 'max-h-0 opacity-0'}`}>
                       <p className="text-sm md:text-base leading-relaxed max-w-md opacity-90 font-medium">{prop.description}</p>
                       <div className="mt-6 flex items-center gap-2 font-bold text-xs uppercase tracking-widest">
-                        Meer info <ArrowRight size={14} />
+                        {ctaText} <ArrowRight size={14} />
                       </div>
                     </div>
                   </div>
@@ -402,6 +405,7 @@ export const About = ({ data }: AboutProps) => {
   const title = data?.title || 'Built for\nScale';
   const description = data?.description || 'Vanuit onze high-tech faciliteit in Honselersdijk bedienen wij de Europese e-commerce markt. Geen romantisch verhaal, maar strakke processen en gegarandeerde kwaliteit.';
   const imgUrl = data?.image ? urlFor(data.image).width(1200).quality(80).url() : 'https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?q=80&w=2670&auto=format&fit=crop';
+  const imageAlt = data?.imageAlt || 'Warehouse Interior';
   const imageBadge = data?.imageBadge || { value: '05', label: 'Hectare' };
   const features = data?.features || [
     { title: 'Klimaatneutraal', description: '100% Elektrisch wagenpark' },
@@ -418,7 +422,7 @@ export const About = ({ data }: AboutProps) => {
           <div className="md:w-1/2 order-2 md:order-1 relative min-h-[400px]">
             <FadeIn className="h-full">
               <div className="relative h-full w-full border border-sage/10 bg-sage/5 p-4 rounded-lg">
-                <img src={imgUrl} alt="Warehouse Interior" className="w-full h-full object-cover grayscale contrast-125" />
+                <img src={imgUrl} alt={imageAlt} className="w-full h-full object-cover grayscale contrast-125" />
                 <div className="absolute top-8 right-8 bg-sage text-white p-4 text-center border border-white/20 shadow-xl rounded-md">
                   <div className="text-3xl font-display font-bold">{imageBadge.value}</div>
                   <div className="text-[10px] uppercase tracking-widest">{imageBadge.label}</div>

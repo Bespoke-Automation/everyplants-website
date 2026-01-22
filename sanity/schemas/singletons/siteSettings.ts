@@ -23,6 +23,12 @@ export default defineType({
       options: { hotspot: true },
     }),
     defineField({
+      name: 'logoAlt',
+      title: 'Logo Alt Text',
+      type: 'string',
+      description: 'Alt text for the logo image',
+    }),
+    defineField({
       name: 'seo',
       title: 'Default SEO',
       type: 'seo',
@@ -61,16 +67,34 @@ export default defineType({
           of: [{ type: 'socialLink' }],
         },
         {
+          name: 'sitemapLabel',
+          title: 'Sitemap Section Label',
+          type: 'string',
+          description: 'Label for the sitemap links section',
+        },
+        {
           name: 'sitemapLinks',
           title: 'Sitemap Links',
           type: 'array',
           of: [{ type: 'navLink' }],
         },
         {
+          name: 'legalLabel',
+          title: 'Legal Section Label',
+          type: 'string',
+          description: 'Label for the legal links section',
+        },
+        {
           name: 'legalLinks',
           title: 'Legal Links',
           type: 'array',
           of: [{ type: 'navLink' }],
+        },
+        {
+          name: 'contactLabel',
+          title: 'Contact Section Label',
+          type: 'string',
+          description: 'Label for the contact info section',
         },
         {
           name: 'copyrightText',

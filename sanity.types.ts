@@ -185,6 +185,7 @@ export type Homepage = {
       crop?: SanityImageCrop;
       _type: "image";
     };
+    heroImageAlt?: string;
     imageCaption?: string;
     badgeText?: string;
   };
@@ -205,6 +206,8 @@ export type Homepage = {
     items?: Array<{
       _key: string;
     } & ValueProp>;
+    instructionText?: string;
+    ctaText?: string;
   };
   howItWorks?: {
     title?: string;
@@ -238,6 +241,7 @@ export type Homepage = {
       crop?: SanityImageCrop;
       _type: "image";
     };
+    imageAlt?: string;
     imageBadge?: {
       value?: string;
       label?: string;
@@ -318,6 +322,7 @@ export type SiteSettings = {
     crop?: SanityImageCrop;
     _type: "image";
   };
+  logoAlt?: string;
   seo?: Seo;
   footer?: {
     address?: string;
@@ -327,12 +332,15 @@ export type SiteSettings = {
     socialLinks?: Array<{
       _key: string;
     } & SocialLink>;
+    sitemapLabel?: string;
     sitemapLinks?: Array<{
       _key: string;
     } & NavLink>;
+    legalLabel?: string;
     legalLinks?: Array<{
       _key: string;
     } & NavLink>;
+    contactLabel?: string;
     copyrightText?: string;
     locationTag?: string;
   };
@@ -444,7 +452,7 @@ export type AllSanitySchemaTypes = Seo | SocialLink | Stat | ProductCategory | W
 export declare const internalGroqTypeReferenceTo: unique symbol;
 // Source: ./sanity/lib/queries.ts
 // Variable: homepageQuery
-// Query: *[_type == "homepage"][0] {    hero {      badge,      headlineLines,      highlightedLine,      tagline,      ctaText,      ctaLink,      heroImage,      imageCaption,      badgeText    },    marqueeItems,    trustBar {      label,      partners[]-> {        _id,        name,        logo      }    },    valueProps {      title,      subtitle,      items[] {        icon,        title,        subtitle,        description,        image      }    },    howItWorks {      title,      subtitle,      steps[] {        number,        title,        description,        image      }    },    assortment {      title,      description,      ctaText,      ctaLink,      categories[] {        name,        image,        height      }    },    about {      label,      title,      description,      image,      imageBadge,      features[] {        title,        description      },      linkText,      linkHref    },    stats[] {      value,      label    },    featuredTestimonial-> {      quote,      authorName,      authorTitle,      authorCompany,      authorImage    },    cta {      title,      subtitle,      primaryButton,      secondaryButton    },    seo {      metaTitle,      metaDescription,      ogImage    }  }
+// Query: *[_type == "homepage"][0] {    hero {      badge,      headlineLines,      highlightedLine,      tagline,      ctaText,      ctaLink,      heroImage,      heroImageAlt,      imageCaption,      badgeText    },    marqueeItems,    trustBar {      label,      partners[]-> {        _id,        name,        logo      }    },    valueProps {      title,      subtitle,      items[] {        icon,        title,        subtitle,        description,        image      },      instructionText,      ctaText    },    howItWorks {      title,      subtitle,      steps[] {        number,        title,        description,        image      }    },    assortment {      title,      description,      ctaText,      ctaLink,      categories[] {        name,        image,        height      }    },    about {      label,      title,      description,      image,      imageAlt,      imageBadge,      features[] {        title,        description      },      linkText,      linkHref    },    stats[] {      value,      label    },    featuredTestimonial-> {      quote,      authorName,      authorTitle,      authorCompany,      authorImage    },    cta {      title,      subtitle,      primaryButton,      secondaryButton    },    seo {      metaTitle,      metaDescription,      ogImage    }  }
 export type HomepageQueryResult = {
   hero: {
     badge: string | null;
@@ -465,6 +473,7 @@ export type HomepageQueryResult = {
       crop?: SanityImageCrop;
       _type: "image";
     } | null;
+    heroImageAlt: string | null;
     imageCaption: string | null;
     badgeText: string | null;
   } | null;
@@ -509,6 +518,8 @@ export type HomepageQueryResult = {
         _type: "image";
       } | null;
     }> | null;
+    instructionText: string | null;
+    ctaText: string | null;
   } | null;
   howItWorks: {
     title: string | null;
@@ -569,6 +580,7 @@ export type HomepageQueryResult = {
       crop?: SanityImageCrop;
       _type: "image";
     } | null;
+    imageAlt: string | null;
     imageBadge: {
       value?: string;
       label?: string;
@@ -645,7 +657,7 @@ export type NavigationQueryResult = {
   } | null;
 } | null;
 // Variable: siteSettingsQuery
-// Query: *[_type == "siteSettings"][0] {    siteName,    siteTagline,    logo,    footer {      address,      phone,      email,      certifications,      socialLinks[] {        platform,        url      },      sitemapLinks[] {        text,        href,        isExternal      },      legalLinks[] {        text,        href,        isExternal      },      copyrightText,      locationTag    }  }
+// Query: *[_type == "siteSettings"][0] {    siteName,    siteTagline,    logo,    logoAlt,    footer {      address,      phone,      email,      certifications,      socialLinks[] {        platform,        url      },      sitemapLabel,      sitemapLinks[] {        text,        href,        isExternal      },      legalLabel,      legalLinks[] {        text,        href,        isExternal      },      contactLabel,      copyrightText,      locationTag    }  }
 export type SiteSettingsQueryResult = {
   siteName: string;
   siteTagline: string | null;
@@ -661,6 +673,7 @@ export type SiteSettingsQueryResult = {
     crop?: SanityImageCrop;
     _type: "image";
   } | null;
+  logoAlt: string | null;
   footer: {
     address: string | null;
     phone: string | null;
@@ -670,16 +683,19 @@ export type SiteSettingsQueryResult = {
       platform: "facebook" | "instagram" | "linkedin" | "twitter" | null;
       url: string | null;
     }> | null;
+    sitemapLabel: string | null;
     sitemapLinks: Array<{
       text: string;
       href: string;
       isExternal: boolean | null;
     }> | null;
+    legalLabel: string | null;
     legalLinks: Array<{
       text: string;
       href: string;
       isExternal: boolean | null;
     }> | null;
+    contactLabel: string | null;
     copyrightText: string | null;
     locationTag: string | null;
   } | null;
@@ -689,8 +705,8 @@ export type SiteSettingsQueryResult = {
 import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
-    "\n  *[_type == \"homepage\"][0] {\n    hero {\n      badge,\n      headlineLines,\n      highlightedLine,\n      tagline,\n      ctaText,\n      ctaLink,\n      heroImage,\n      imageCaption,\n      badgeText\n    },\n    marqueeItems,\n    trustBar {\n      label,\n      partners[]-> {\n        _id,\n        name,\n        logo\n      }\n    },\n    valueProps {\n      title,\n      subtitle,\n      items[] {\n        icon,\n        title,\n        subtitle,\n        description,\n        image\n      }\n    },\n    howItWorks {\n      title,\n      subtitle,\n      steps[] {\n        number,\n        title,\n        description,\n        image\n      }\n    },\n    assortment {\n      title,\n      description,\n      ctaText,\n      ctaLink,\n      categories[] {\n        name,\n        image,\n        height\n      }\n    },\n    about {\n      label,\n      title,\n      description,\n      image,\n      imageBadge,\n      features[] {\n        title,\n        description\n      },\n      linkText,\n      linkHref\n    },\n    stats[] {\n      value,\n      label\n    },\n    featuredTestimonial-> {\n      quote,\n      authorName,\n      authorTitle,\n      authorCompany,\n      authorImage\n    },\n    cta {\n      title,\n      subtitle,\n      primaryButton,\n      secondaryButton\n    },\n    seo {\n      metaTitle,\n      metaDescription,\n      ogImage\n    }\n  }\n": HomepageQueryResult;
+    "\n  *[_type == \"homepage\"][0] {\n    hero {\n      badge,\n      headlineLines,\n      highlightedLine,\n      tagline,\n      ctaText,\n      ctaLink,\n      heroImage,\n      heroImageAlt,\n      imageCaption,\n      badgeText\n    },\n    marqueeItems,\n    trustBar {\n      label,\n      partners[]-> {\n        _id,\n        name,\n        logo\n      }\n    },\n    valueProps {\n      title,\n      subtitle,\n      items[] {\n        icon,\n        title,\n        subtitle,\n        description,\n        image\n      },\n      instructionText,\n      ctaText\n    },\n    howItWorks {\n      title,\n      subtitle,\n      steps[] {\n        number,\n        title,\n        description,\n        image\n      }\n    },\n    assortment {\n      title,\n      description,\n      ctaText,\n      ctaLink,\n      categories[] {\n        name,\n        image,\n        height\n      }\n    },\n    about {\n      label,\n      title,\n      description,\n      image,\n      imageAlt,\n      imageBadge,\n      features[] {\n        title,\n        description\n      },\n      linkText,\n      linkHref\n    },\n    stats[] {\n      value,\n      label\n    },\n    featuredTestimonial-> {\n      quote,\n      authorName,\n      authorTitle,\n      authorCompany,\n      authorImage\n    },\n    cta {\n      title,\n      subtitle,\n      primaryButton,\n      secondaryButton\n    },\n    seo {\n      metaTitle,\n      metaDescription,\n      ogImage\n    }\n  }\n": HomepageQueryResult;
     "\n  *[_type == \"navigation\"][0] {\n    mainNav[] {\n      text,\n      href,\n      isExternal\n    },\n    ctaButton {\n      text,\n      href\n    }\n  }\n": NavigationQueryResult;
-    "\n  *[_type == \"siteSettings\"][0] {\n    siteName,\n    siteTagline,\n    logo,\n    footer {\n      address,\n      phone,\n      email,\n      certifications,\n      socialLinks[] {\n        platform,\n        url\n      },\n      sitemapLinks[] {\n        text,\n        href,\n        isExternal\n      },\n      legalLinks[] {\n        text,\n        href,\n        isExternal\n      },\n      copyrightText,\n      locationTag\n    }\n  }\n": SiteSettingsQueryResult;
+    "\n  *[_type == \"siteSettings\"][0] {\n    siteName,\n    siteTagline,\n    logo,\n    logoAlt,\n    footer {\n      address,\n      phone,\n      email,\n      certifications,\n      socialLinks[] {\n        platform,\n        url\n      },\n      sitemapLabel,\n      sitemapLinks[] {\n        text,\n        href,\n        isExternal\n      },\n      legalLabel,\n      legalLinks[] {\n        text,\n        href,\n        isExternal\n      },\n      contactLabel,\n      copyrightText,\n      locationTag\n    }\n  }\n": SiteSettingsQueryResult;
   }
 }

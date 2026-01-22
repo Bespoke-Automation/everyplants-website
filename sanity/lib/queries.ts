@@ -10,6 +10,7 @@ export const homepageQuery = defineQuery(`
       ctaText,
       ctaLink,
       heroImage,
+      heroImageAlt,
       imageCaption,
       badgeText
     },
@@ -31,7 +32,9 @@ export const homepageQuery = defineQuery(`
         subtitle,
         description,
         image
-      }
+      },
+      instructionText,
+      ctaText
     },
     howItWorks {
       title,
@@ -59,6 +62,7 @@ export const homepageQuery = defineQuery(`
       title,
       description,
       image,
+      imageAlt,
       imageBadge,
       features[] {
         title,
@@ -111,6 +115,7 @@ export const siteSettingsQuery = defineQuery(`
     siteName,
     siteTagline,
     logo,
+    logoAlt,
     footer {
       address,
       phone,
@@ -120,16 +125,19 @@ export const siteSettingsQuery = defineQuery(`
         platform,
         url
       },
+      sitemapLabel,
       sitemapLinks[] {
         text,
         href,
         isExternal
       },
+      legalLabel,
       legalLinks[] {
         text,
         href,
         isExternal
       },
+      contactLabel,
       copyrightText,
       locationTag
     }

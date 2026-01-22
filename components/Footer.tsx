@@ -28,6 +28,9 @@ const Footer: React.FC<FooterProps> = ({ data }) => {
   ];
   const copyrightText = data?.copyrightText || '© 2025 EveryPlants Logistics B.V.';
   const locationTag = data?.locationTag || 'Westland, NL';
+  const sitemapLabel = data?.sitemapLabel || 'Sitemap';
+  const legalLabel = data?.legalLabel || 'Legal';
+  const contactLabel = data?.contactLabel || 'Contact';
 
   return (
     <footer className="bg-sage text-cream pt-24 pb-12 border-t border-sage">
@@ -57,7 +60,7 @@ const Footer: React.FC<FooterProps> = ({ data }) => {
           <div className="md:w-2/3 grid grid-cols-2 md:grid-cols-3 gap-12">
 
             <div className="space-y-6">
-              <h4 className="font-bold uppercase tracking-widest text-xs text-cream/40">Sitemap</h4>
+              <h4 className="font-bold uppercase tracking-widest text-xs text-cream/40">{sitemapLabel}</h4>
               <ul className="space-y-4">
                 {sitemapLinks.map((link) => (
                   <li key={link.text}>
@@ -76,7 +79,7 @@ const Footer: React.FC<FooterProps> = ({ data }) => {
             </div>
 
             <div className="space-y-6">
-              <h4 className="font-bold uppercase tracking-widest text-xs text-cream/40">Legal</h4>
+              <h4 className="font-bold uppercase tracking-widest text-xs text-cream/40">{legalLabel}</h4>
               <ul className="space-y-4">
                 {legalLinks.map((link) => (
                   <li key={link.text}>
@@ -94,7 +97,7 @@ const Footer: React.FC<FooterProps> = ({ data }) => {
             </div>
 
             <div className="space-y-6">
-              <h4 className="font-bold uppercase tracking-widest text-xs text-cream/40">Contact</h4>
+              <h4 className="font-bold uppercase tracking-widest text-xs text-cream/40">{contactLabel}</h4>
               <ul className="space-y-4 text-sm text-cream/80 font-mono">
                 <li>{phone}</li>
                 <li>{email}</li>
