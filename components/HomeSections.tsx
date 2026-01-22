@@ -323,51 +323,16 @@ export const HowItWorks = ({ data }: HowItWorksProps) => {
   const subtitle = data?.subtitle || 'Systematisch van installatie tot levering.';
 
   return (
-    <section className="py-16 md:py-32 bg-sage text-cream border-t border-b border-sage/20">
-      <div className="container mx-auto px-4 sm:px-6 md:px-12">
+    <section className="py-32 bg-sage text-cream border-t border-b border-sage/20">
+      <div className="container mx-auto px-6 md:px-12">
         <FadeIn>
-          <div className="mb-12 md:mb-24 flex flex-col md:flex-row justify-between items-start md:items-end border-b border-cream/20 pb-6 md:pb-8">
-            <h2 className="text-3xl sm:text-4xl md:text-7xl font-display font-black uppercase tracking-tighter">{title}</h2>
-            <p className="text-cream/60 text-sm font-mono uppercase tracking-widest max-w-sm md:text-right mt-4 md:mt-0">{subtitle}</p>
+          <div className="mb-24 flex flex-col md:flex-row justify-between items-end border-b border-cream/20 pb-8">
+            <h2 className="text-4xl md:text-7xl font-display font-black uppercase tracking-tighter">{title}</h2>
+            <p className="text-cream/60 text-sm font-mono uppercase tracking-widest max-w-sm text-right mt-4 md:mt-0">{subtitle}</p>
           </div>
         </FadeIn>
 
-        {/* Mobile Layout: Simple stacked cards without sticky */}
-        <div className="md:hidden space-y-6">
-          {steps.map((step, idx) => {
-            const imgUrl = step.image ? urlFor(step.image).width(1200).quality(80).url() : defaultImages[idx] || defaultImages[0];
-            return (
-              <FadeIn key={idx} delay={idx * 100}>
-                <div className="bg-cream text-sage overflow-hidden rounded-lg border border-sage/20 shadow-lg">
-                  {/* Image section - top on mobile */}
-                  <div className="relative h-40 sm:h-48 overflow-hidden">
-                    <img
-                      src={imgUrl}
-                      alt={step.title}
-                      className="w-full h-full object-cover grayscale"
-                    />
-                    <div className="absolute inset-0 bg-sage/10 mix-blend-multiply" />
-                    <span className="absolute top-4 left-4 text-4xl font-display font-black text-sage/20 select-none">{step.number}</span>
-                  </div>
-
-                  {/* Content section */}
-                  <div className="p-5 sm:p-6">
-                    <div className="flex justify-between items-start mb-3">
-                      <h3 className="text-2xl sm:text-3xl font-display font-bold uppercase tracking-tight">{step.title}</h3>
-                      <div className="p-2 border border-sage/10 rounded-md flex-shrink-0">
-                        <ArrowRight className="rotate-45" size={16} />
-                      </div>
-                    </div>
-                    <p className="text-sage/80 text-base font-medium leading-relaxed">{step.description}</p>
-                  </div>
-                </div>
-              </FadeIn>
-            );
-          })}
-        </div>
-
-        {/* Desktop Layout: Sticky stacking cards */}
-        <div className="hidden md:block max-w-6xl mx-auto relative pb-24">
+        <div className="max-w-6xl mx-auto relative pb-24">
           {steps.map((step, idx) => {
             const imgUrl = step.image ? urlFor(step.image).width(1200).quality(80).url() : defaultImages[idx] || defaultImages[0];
             return (
@@ -375,27 +340,27 @@ export const HowItWorks = ({ data }: HowItWorksProps) => {
                 key={idx}
                 className="sticky transition-all duration-300"
                 style={{
-                  top: `${120 + idx * 40}px`,
+                  top: `${140 + idx * 50}px`,
                   marginBottom: `${(steps.length - idx - 1) * 20}px`,
                   zIndex: idx + 1,
                 }}
               >
-                <div className="bg-cream text-sage p-0 h-[450px] lg:h-[500px] flex flex-row shadow-2xl border border-sage/20 overflow-hidden relative rounded-lg">
-                  <div className="w-1/2 p-8 lg:p-12 relative z-10 flex flex-col justify-between border-r border-sage/10">
+                <div className="bg-cream text-sage p-0 h-[450px] md:h-[500px] flex flex-col md:flex-row shadow-2xl border border-sage/20 overflow-hidden relative rounded-lg">
+                  <div className="w-full md:w-1/2 p-8 md:p-12 relative z-10 flex flex-col justify-between border-b md:border-b-0 md:border-r border-sage/10">
                     <div className="flex justify-between items-start">
-                      <span className="text-5xl lg:text-7xl font-display font-black text-sage/10 select-none">{step.number}</span>
+                      <span className="text-5xl md:text-7xl font-display font-black text-sage/10 select-none">{step.number}</span>
                       <div className="p-2 border border-sage/10 rounded-md">
                         <ArrowRight className="rotate-45" />
                       </div>
                     </div>
 
                     <div>
-                      <h3 className="text-3xl lg:text-5xl font-display font-bold uppercase mb-4 tracking-tight">{step.title}</h3>
-                      <p className="text-sage/80 text-base lg:text-lg font-medium leading-relaxed max-w-md">{step.description}</p>
+                      <h3 className="text-3xl md:text-5xl font-display font-bold uppercase mb-4 tracking-tight">{step.title}</h3>
+                      <p className="text-sage/80 text-lg font-medium leading-relaxed max-w-md">{step.description}</p>
                     </div>
                   </div>
 
-                  <div className="w-1/2 h-full relative group overflow-hidden">
+                  <div className="w-full md:w-1/2 h-full relative group overflow-hidden">
                     <img src={imgUrl} alt={step.title} className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 scale-100 group-hover:scale-105" />
                     <div className="absolute inset-0 bg-sage/10 mix-blend-multiply" />
                   </div>
